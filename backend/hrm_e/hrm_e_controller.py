@@ -203,8 +203,6 @@ class SalaryController:
             request.data["sal_added_by_user"] = request.user.guid
           
             request.POST._mutable = False
-
-            # if request.user.role in ['admin','manager'] or request.user.is_superuser: # roles
             validated_data = SalarySerializer(data=request.data)
             if validated_data.is_valid():
                 response = validated_data.save()
@@ -223,9 +221,6 @@ class SalaryController:
             else:
                 error_message = get_first_error_message(validated_data.errors, "UNSUCCESSFUL")
                 return Response({'data':error_message}, 400)
-
-            # else:
-            #     return Response({'data':"Permission Denaied"}, 400)
             
         except Exception as e:
             return Response({'error':str(e)}, 500)
@@ -265,7 +260,7 @@ class SalaryController:
                     request.POST._mutable = False
                     serialized_data = SalarySerializer(instance, data=request.data, partial=True)
 
-                    # if request.user.role in ['admin','manager'] or request.user.is_superuser: # roles
+                   
                     if serialized_data.is_valid():
                         response = serialized_data.save()
                         response_data = SalarySerializer(response).data
@@ -273,8 +268,6 @@ class SalaryController:
                     else:
                         error_message = get_first_error_message(serialized_data.errors, "UNSUCCESSFUL")
                         return Response({'data':error_message}, 400)
-                    # else:
-                    #     return Response({'data':"Permission Denaied"}, 400)
                     
                 else:
                     return Response({"data":"NOT FOUND"}, 404)
@@ -310,7 +303,6 @@ class RankController:
             
             request.POST._mutable = False
 
-            # if request.user.role in ['admin','manager'] or request.user.is_superuser: # roles
             validated_data = RankSerializer(data=request.data)
             if validated_data.is_valid():
                 response = validated_data.save()
@@ -330,8 +322,6 @@ class RankController:
             else:
                 error_message = get_first_error_message(validated_data.errors, "UNSUCCESSFUL")
                 return Response({'data':error_message}, 400)
-            # else:
-            #     return Response({'data':"Permission Denaied"}, 400)
             
         except Exception as e:
             return Response({'error':str(e)}, 500)
