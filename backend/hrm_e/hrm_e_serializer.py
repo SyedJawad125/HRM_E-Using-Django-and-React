@@ -1,4 +1,4 @@
-from rest_framework import serializers
+from rest_framework import serializers # type: ignore
 from hrm_e.models import Department, Employee, Rank, Salary
 from user_auth.user_serializer import UserListingSerializer
 
